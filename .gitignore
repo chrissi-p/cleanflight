@@ -18,3 +18,11 @@ docs/Manual.pdf
 README.pdf
 
 /Debug/
+
+# my additions
+docs/Doxygen/
+*.config
+*.creator
+*.files
+*.includes
+*.user
