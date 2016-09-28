@@ -56,6 +56,7 @@
 #include "rx/msp.h"
 #include "rx/xbus.h"
 #include "rx/ibus.h"
+#include "rx/nRF24L01.h"
 
 #include "rx/rx.h"
 
@@ -210,6 +211,12 @@ void rxInit(modeActivationCondition_t *modeActivationConditions)
         rxMspInit(&rxRuntimeConfig, &rcReadRawFunc);
     }
 
+#ifdef NRF24
+    if(feature(FEATURE_RX_NRF24)) {
+        rxNRF24Init(rxConfig, &rxRuntimeConfig, &rcReadRawFunc);
+    }
+#endif
+
     if (feature(FEATURE_RX_PPM) || feature(FEATURE_RX_PARALLEL_PWM)) {
         rxRefreshRate = 20000;
         rxPwmInit(&rxRuntimeConfig, &rcReadRawFunc);
@@ -353,6 +360,18 @@ void updateRx(uint32_t currentTime)
             rxDataReceived = true;
             rxIsInFailsafeMode = (frameStatus & SERIAL_RX_FRAME_FAILSAFE) != 0;
             rxSignalReceived = !rxIsInFailsafeMode;
+            needRxSignalBefore = currentTime + DELAY_10_HZ;
+        }
+    }
+#endif
+
+#ifdef NRF24
+    if (feature(FEATURE_RX_NRF24)) {
+        rxDataReceived = rxNRF24ReceivePacket();
+
+        if (rxDataReceived) {
+            rxSignalReceived = true;
+            rxIsInFailsafeMode = false;
             needRxSignalBefore = currentTime + DELAY_10_HZ;
         }
     }

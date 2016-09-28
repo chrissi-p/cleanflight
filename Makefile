@@ -256,6 +256,7 @@ COMMON_SRC = build_config.c \
 		   flight/mixer.c \
 		   flight/servos.c \
 		   drivers/bus_i2c_soft.c \
+			 drivers/bus_spi_soft.c \
 		   drivers/serial.c \
 		   drivers/sound_beeper.c \
 		   drivers/system.c \
@@ -286,6 +287,7 @@ COMMON_SRC = build_config.c \
 		   rx/spektrum.c \
 		   rx/xbus.c \
 		   rx/ibus.c \
+			 rx/nRF24L01.c \
 		   sensors/sensors.c \
 		   sensors/acceleration.c \
 		   sensors/battery.c \
@@ -324,7 +326,7 @@ VCP_SRC = \
 		   vcp/usb_prop.c \
 		   vcp/usb_pwr.c \
 		   drivers/serial_usb_vcp.c \
-		   drivers/usb_io.c 
+		   drivers/usb_io.c
 
 NAZE_SRC = startup_stm32f10x_md_gcc.S \
 		   drivers/accgyro_adxl345.c \
@@ -572,7 +574,7 @@ COLIBRI_RACE_SRC = \
 		   $(HIGHEND_SRC) \
 		   $(COMMON_SRC) \
 		   $(VCP_SRC)
-		   
+
 LUX_RACE_SRC = \
 		   $(STM32F30x_COMMON_SRC) \
 		   drivers/accgyro_mpu.c \
@@ -583,7 +585,7 @@ LUX_RACE_SRC = \
 		   drivers/serial_usb_vcp.c \
 		   $(HIGHEND_SRC) \
 		   $(COMMON_SRC) \
-		   $(VCP_SRC)		   
+		   $(VCP_SRC)
 
 SPARKY_SRC = \
 		   $(STM32F30x_COMMON_SRC) \
@@ -709,7 +711,7 @@ SPRACINGF3MINI_SRC	 = \
 		   $(HIGHEND_SRC) \
 		   $(COMMON_SRC) \
 		   $(VCP_SRC)
-		   
+
 IRCFUSIONF3_SRC = \
 		   $(STM32F30x_COMMON_SRC) \
 		   drivers/accgyro_mpu.c \

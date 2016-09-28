@@ -198,6 +198,9 @@
 #define USE_SERVOS
 #define USE_CLI
 
+#define USE_SOFT_SPI
+#define NRF24
+
 #define SPEKTRUM_BIND
 // UART2, PA3
 #define BIND_PORT  GPIOA
